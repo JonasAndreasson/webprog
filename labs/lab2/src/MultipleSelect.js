@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class MultipleSelect extends Component {
   constructor(props) {
@@ -19,7 +20,9 @@ class MultipleSelect extends Component {
         <label> Pick your {this.props.name}s: </label>
         <div className="row p-3 bg-white border rounded-3">
           {ingredients.map(name =>
+          
             <div key={name} className="col-4">
+              
               <input
                 type="checkbox"
                 className="form-check-input"
@@ -29,8 +32,12 @@ class MultipleSelect extends Component {
                 checked={this.props.selected.includes(name)}
                 id={"extra-" + name}
               />
+              <Link className='nav-link' to = {"/view-ingredient/"+name}>
               <label htmlFor={"extra-" + name}> {name} </label>
+              
+              </Link>
             </div>
+           
           )}
         </div>
       </div>

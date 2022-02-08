@@ -4,9 +4,11 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 import { Component } from 'react';
 import inventory from './inventory.ES6';
+import ComposeSaladWrapper from './ComposeSaladWrapper';
 import ComposeSalad from './ComposeSalad';
+import ViewIngredient from './ViewIngredient'
 import ViewOrder from './ViewOrder';
-import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Link, Route, Routes, useNavigate } from 'react-router-dom';
 
 
 class App extends Component{
@@ -22,7 +24,6 @@ class App extends Component{
     const copyState = [...this.state.shoppingCart];
     copyState.push(salad);
     this.setState({shoppingCart : copyState});
-    console.log(salad);
   }
 
     render(){
@@ -39,8 +40,9 @@ class App extends Component{
   renderRouter(){
     return(
     <Routes>
-      <Route path="compose-salad" element={<ComposeSalad inventory={inventory} addSalad = {this.addSalad} />}/>
+      <Route path="compose-salad" element={<ComposeSaladWrapper inventory={inventory} addSalad = {this.addSalad} />}/>
       <Route path="view-order" element = {<ViewOrder order = {this.state.shoppingCart}/>} />
+      <Route path="view-ingredient/*" element = {<ViewIngredient inventory = {inventory}/>}/>
       <Route path="" element = {<h1> Välkommen </h1>} />
       <Route path="*" element = {<h1>404  - Not Found!</h1>} />
     </Routes>
@@ -53,7 +55,7 @@ class App extends Component{
     return(
       <div>
       <ViewOrder order = {this.state.shoppingCart}/>
-      <ComposeSalad inventory={inventory} addSalad = {this.addSalad} />
+      <ComposeSaladWrapper inventory={inventory} addSalad = {this.addSalad} />
       </div>
     );
   }

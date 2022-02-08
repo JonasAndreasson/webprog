@@ -1,14 +1,9 @@
-import { selectOptions } from '@testing-library/user-event/dist/select-options';
-import { Button } from 'bootstrap';
 import { Component } from 'react';
-import App from './App';
 import SingleSelect from './SingleSelect';
 import MultipleSelect from './MultipleSelect';
-//let tool = require('./lab1.js');
 import {Salad} from './lab1';
 
 class ComposeSalad extends Component {
-  //Salad salad;
   constructor(props){
     super(props);
     this.state = { foundation: ''
@@ -35,6 +30,7 @@ class ComposeSalad extends Component {
   }
   handleSubmit(event) {
     event.preventDefault();
+    event.target.classList.add("was-validated");
     let inventory = this.props.inventory;
     let salad = new Salad()
       .add(this.state.foundation, inventory[this.state.foundation])
@@ -51,6 +47,7 @@ class ComposeSalad extends Component {
                   , dressing:   ''
                   , extra: {}
                   });
+  this.props.navigate('/view-order');
   }
 
   getExtras() {
@@ -63,12 +60,12 @@ class ComposeSalad extends Component {
       <div className="continer col-12"> 
       <div className="row h-200 p-5 bg-light border rounded-3">
       <h2>Välj innehållet i din sallad</h2>
+      <form onSubmit={this.handleSubmit} noValidate>
       <SingleSelect inventory={this.props.inventory} name='foundation' onChange={this.handleSingleChange} selected={this.state.foundation} />
       <SingleSelect inventory={this.props.inventory} name='protein' onChange={this.handleSingleChange} selected={this.state.protein} />
       <MultipleSelect inventory={this.props.inventory} name='extra' onChange={this.handleMultipleChange} selected={this.getExtras()} />
       <SingleSelect inventory={this.props.inventory} name='dressing' onChange={this.handleSingleChange} selected={this.state.dressing} />
-      <form onSubmit={this.handleSubmit}>
-      <input type="submit" value="Lägg beställning" />
+      <input type="submit" value="Lägg beställning"/>
       </form>
       </div>
       </div>
