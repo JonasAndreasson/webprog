@@ -32,7 +32,7 @@ class MultipleSelect extends Component {
                 checked={this.props.selected.includes(name)}
                 id={"extra-" + name}
               />
-              <Link className='nav-link' to = {"/view-ingredient/"+name}>
+              <Link className='nav-link' to = {"/view-ingredient/"+name} className="col-4">
               <label htmlFor={"extra-" + name}> {name} </label>
               
               </Link>

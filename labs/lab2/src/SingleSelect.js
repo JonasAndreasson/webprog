@@ -32,6 +32,8 @@ class SingleSelect extends Component {
         <option value=""></option>
         {ingredients.map(name => <option key={name} value={name} > {name}</option>)}
       </select>
+      <div className="valid-feedback">Korrekt!</div>
+      <div className = "invalid-feedback">Välj {this.props.name} </div>
       </label></div>
     )
   }
