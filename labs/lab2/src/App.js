@@ -42,7 +42,7 @@ class App extends Component{
     <Routes>
       <Route path="compose-salad" element={<ComposeSaladWrapper inventory={inventory} addSalad = {this.addSalad} />}/>
       <Route path="view-order" element = {<ViewOrder order = {this.state.shoppingCart}/>} />
-      <Route path="view-ingredient/*" element = {<ViewIngredient inventory = {inventory}/>}/>
+      <Route path="view-ingredient/:name" element = {<ViewIngredient inventory = {inventory}/>}/>
       <Route path="" element = {<h1> Välkommen </h1>} />
       <Route path="*" element = {<h1>404  - Not Found!</h1>} />
     </Routes>
