@@ -1,5 +1,8 @@
+import { Component } from 'reach';
+import { useParams } from 'react-router-dom';
+
 function ViewIngredient(props){
-    var name = window.location.href.split("/view-ingredient/")[1];
+    const name = useParams().name;
     let inventory = props.inventory;
     let ingredient = inventory[name];
     return(
