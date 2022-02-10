@@ -1,4 +1,4 @@
-import { Component } from 'reach';
+import { Component } from 'react';
 import { useParams } from 'react-router-dom';
 
 function ViewIngredient(props){
