@@ -42,7 +42,11 @@ class ComposeSalad extends Component {
       .map(([k,_]) => k)
       .forEach(e => salad.add(e, inventory[e]))
     this.props.addSalad(salad);
-
+    if(window.localStorage.getItem('placed')==null){
+    window.localStorage.setItem('placed', JSON.stringify(salad));
+    } else{
+      window.localStorage.setItem('placed', window.localStorage.getItem('placed')+JSON.stringify(salad));
+    }
     this.setState({ foundation: ''
                   , protein:    ''
                   , dressing:   ''
@@ -60,7 +64,7 @@ class ComposeSalad extends Component {
   render() {
     return (
       
-      <div className="continer col-12"> 
+      <div className="col-auto"> 
       <div className="row h-200 p-5 bg-light border rounded-3">
       <h2>Välj innehållet i din sallad</h2>
       <form onSubmit={this.handleSubmit} noValidate>
@@ -69,7 +73,9 @@ class ComposeSalad extends Component {
       <SingleSelect inventory={this.props.inventory} name='protein' onChange={this.handleSingleChange} selected={this.state.protein} />
       <MultipleSelect inventory={this.props.inventory} name='extra' onChange={this.handleMultipleChange} selected={this.getExtras()} />
       <SingleSelect inventory={this.props.inventory} name='dressing' onChange={this.handleSingleChange} selected={this.state.dressing} />
-      <input type="submit" value="Lägg beställning"/>
+      <div>
+      <input className = "btn btn-primary" type="submit" value="Lägg till beställning i varukorgen"/>
+      </div>
       </form>
       </div>
       </div>

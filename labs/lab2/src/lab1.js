@@ -64,7 +64,7 @@ export class Salad {
     }
 }
 
-Salad.prototype.getPrice = function () {
+Salad.prototype.getPrice = function (salad) {
     var sum = 0;
     const reducer = (previousValue,currentValue) => {
         if (currentValue.amount){
@@ -79,11 +79,22 @@ Salad.prototype.getPrice = function () {
             return 0;
         }
     }
-    sum = sum + this.foundation.reduce(reducer,0);
-    sum = sum + this.extra.reduce(reducer, 0);
-    sum = sum + this.protein.reduce(reducer,0);
-    sum = sum + this.dressing.reduce(reducer,0);
+    sum = sum + salad.foundation.reduce(reducer,0);
+    sum = sum + salad.extra.reduce(reducer, 0);
+    sum = sum + salad.protein.reduce(reducer,0);
+    sum = sum + salad.dressing.reduce(reducer,0);
     return sum;        
+}
+
+Salad.prototype.json = function () {
+    var sb = [];
+    sb[sb.length] = this.foundation[0].name;
+    sb[sb.length] = this.protein[0].name;
+    for(var i = 0; i < this.extra.length; i++){
+        sb[sb.length] = this.extra[i].name;
+    }
+    sb[sb.length] = this.dressing[0].name;
+    return sb;
 }
 
 Salad.prototype.count = function (property){
@@ -104,7 +115,7 @@ Salad.prototype.count = function (property){
     }
     return amount;
 } 
-Salad.prototype.makeUp = function () {
+Salad.prototype.makeUp = function (salad) {
     var sb = '';
     const reducer = (previousValue,currentValue) => {
         if (currentValue.name && !previousValue.name){
@@ -116,10 +127,10 @@ Salad.prototype.makeUp = function () {
             return "";
         }
     }
-    sb = sb + this.foundation.reduce(reducer, "");
-    sb = sb + " &" + this.protein.reduce(reducer, "");
-    sb = sb + " &" + this.extra.reduce(reducer, "");
-    sb = sb + " &" + this.dressing.reduce(reducer, "");
+    sb = sb + salad.foundation.reduce(reducer, "");
+    sb = sb + "," + salad.protein.reduce(reducer, "");
+    sb = sb + "," + salad.extra.reduce(reducer, "");
+    sb = sb + "," + salad.dressing.reduce(reducer, "");
     return sb;
 }
 class GourmetSalad extends Salad{

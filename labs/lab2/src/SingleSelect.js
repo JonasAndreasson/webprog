@@ -24,6 +24,7 @@ class SingleSelect extends Component {
       <div className='form-group'>
       <label> Pick your {this.props.name}:
       <select 
+      className='form-select'
       value={this.props.selected} 
       onChange={this.handleChange} 
       required="required"
