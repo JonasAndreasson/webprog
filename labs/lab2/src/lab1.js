@@ -1,4 +1,5 @@
 'use strict';
+import { v4 as uuidv4 } from 'uuid';
 const imported = require("./inventory.ES6.js");
 export function makeOptions(invent, key){
     let names = Object.keys(invent);
@@ -29,10 +30,7 @@ export class Salad {
         this.protein = [];
         this.extra = [];
         this.dressing = [];
-        Object.defineProperty(this, "uuid", {
-            value: 'salad_' + Salad.instanceCounter++,
-            writable: false
-          });
+        this.uuid = uuidv4();
     }
     add(ingredient, info){
         let copyOfInfo = {name : ingredient};
